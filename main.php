@@ -10,14 +10,21 @@ function get_generator()
     return new Generator(realpath(dirname(__FILE__) . '/oss-sources'));
 }
 
+function generate_license($source, $licenser, $year)
+{
+    $content = get_generator()->generate($source, $licenser, $year);
+
+    return new Response($content, 200, array('content-type' => 'text/plain'));
+}
+
 $app = new Silex\Application();
 
 $app->get('/generate/{source}/{licenser}/{year}', function ($source, $licenser, $year) use ($app) {
-    return get_generator()->generate($app->escape($source), $app->escape($licenser), $app->escape($year));
+    return generate_license($app->escape($source), $app->escape($licenser), $app->escape($year));
 });
 
 $app->post('/generate/{source}', function (Request $request) use ($app) {
-    return get_generator()->generate($request->get('source'), $request->get('licenser'), $request->get('year'));
+    return generate_license($request->get('source'), $request->get('licenser'), $request->get('year'));
 });
 
 $app->run();
