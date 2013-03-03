@@ -1,0 +1,17 @@
+{
+    "name": "keep/oss-license-gen",
+    "description": "An easy way to generate your open source project license",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jessé Alves Galdino",
+            "email": "galdino.jesse@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Keep": "src/" }
+    },
+    "require": {
+        "silex/silex": "1.0.*@dev"
+    }
+}
